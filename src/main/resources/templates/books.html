@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Book List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.0/css/bootstrap.css}"/>
+    <script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/5.1.0/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <td>Title</td>
+            <td>Publisher</td>
+            <td>Author</td>
+            <td>Room</td>
+            <td>Shelf</td>
+            <td>Status</td>
+            <td>Comment</td>
+            <td>Date Up</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.name}"/>
+            <td th:text="${book.author.firstName+' '+book.author.lastName}"/>
+            <td th:text="${book.publisher.name}"/>
+            <td th:text="${book.shelf.room.name}"/>
+            <td th:text="${book.shelf.letter+' - '+book.shelf.number}"/>
+            <td th:text="${book.status.statusType.name}"/>
+            <td th:text="${book.status.comment}"/>
+            <td th:text="${book.status.dateUp}"/>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

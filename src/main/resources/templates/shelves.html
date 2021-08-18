@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Shelf List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.0/css/bootstrap.css}"/>
+    <script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/5.1.0/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <td>Room</td>
+            <td>Letter</td>
+            <td>Number</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="shelf : ${shelves}">
+            <td th:text="${shelf.room.name}"/>
+            <td th:text="${shelf.letter}"/>
+            <td th:text="${shelf.number}"/>
+            <td><a th:href="${'/books/shelf/'+shelf.id}">Show Books</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
