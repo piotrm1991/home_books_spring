@@ -27,4 +27,8 @@ public class RoomService {
         Room room = this.roomRepository.findRoomByName(name).stream().findFirst().get();
         return room;
     }
+
+    public Room findRoomById(Integer idRoom) {
+        return this.roomRepository.findRoomById(idRoom);
+    }
 }

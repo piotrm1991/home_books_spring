@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PublisherService {
@@ -21,5 +22,9 @@ public class PublisherService {
 
     public List<Publisher> getAllPublishers() {
         return this.publisherRepository.findAll();
+    }
+
+    public Optional<Publisher> findById(Integer id) {
+        return this.publisherRepository.findById(id);
     }
 }
