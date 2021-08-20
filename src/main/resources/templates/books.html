@@ -32,6 +32,7 @@
             <td th:text="${book.status.statusType.name}"/>
             <td th:text="${book.status.comment}"/>
             <td th:text="${book.status.dateUp}"/>
+            <td><a th:href="${'/book/delete/'+book.id}">Usun</a></td>
         </tr>
         </tbody>
     </table>

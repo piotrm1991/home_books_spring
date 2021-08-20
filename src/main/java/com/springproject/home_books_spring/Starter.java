@@ -33,6 +33,10 @@ public class Starter implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+
+        this.init();
+
+
         Author build = Author.builder().firstName("test1").lastName("test2").build();
         authorService.addAuthor(build);
         Author build1 = Author.builder().firstName("test3").lastName("test5").build();
@@ -75,5 +79,10 @@ public class Starter implements CommandLineRunner {
                 Book.builder().name("Book2").author(build1).publisher(test1).shelf(shelf3ForBook).status(Status.builder().statusType(test11).comment("Komentarz2").dateUp(new Date(System.currentTimeMillis())).build()).build();
         bookService.addBook(book1);
         bookService.addBook(book2);
+    }
+
+    private void init() {
+        this.publisherService.prepareDefaultPublisher();
+        this.authorService.prepareDefaultAuthor();
     }
 }

@@ -14,13 +14,16 @@
         <tr>
             <td>First Name</td>
             <td>Last Name</td>
+            <td>nBooks</td>
         </tr>
         </thead>
         <tbody>
         <tr th:each="author : ${authors}">
             <td th:text="${author.firstName}"/>
             <td th:text="${author.lastName}"/>
+            <td th:text="${author.nBooks}"/>
             <td><a th:href="${'/books/author/'+author.id}">Show Books</a></td>
+            <td><a th:href="${'/author/delete/'+author.id}">Delete</a></td>
         </tr>
         </tbody>
     </table>

@@ -43,4 +43,8 @@ public class BookService {
     public List<Book> getBooksByShelfId(Integer id) {
         return (List<Book>) this.bookRepository.findByShelfId(id);
     }
+
+    public void deleteBook(Integer id) {
+        this.bookRepository.deleteById(id);
+    }
 }

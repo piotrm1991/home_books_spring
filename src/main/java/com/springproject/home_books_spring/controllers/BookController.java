@@ -94,4 +94,10 @@ public class BookController {
         model.addAttribute("statusTypes", this.statusTypeService.getAllStatusTypes());
         return "bookForm";
     }
+
+    @RequestMapping("/book/delete/{id}")
+    public String deleteBook(@PathVariable("id") Integer id) {
+        this.bookService.deleteBook(id);
+        return "redirect:/books";
+    }
 }

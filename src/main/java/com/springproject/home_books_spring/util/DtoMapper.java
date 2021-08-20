@@ -1,6 +1,8 @@
 package com.springproject.home_books_spring.util;
 
+import com.springproject.home_books_spring.domain.dto.AuthorDto;
 import com.springproject.home_books_spring.domain.dto.BookDto;
+import com.springproject.home_books_spring.domain.dto.PublisherDto;
 import com.springproject.home_books_spring.domain.dto.ShelfDto;
 import com.springproject.home_books_spring.domain.entites.*;
 import com.springproject.home_books_spring.domain.repository.StatusRepository;
@@ -32,6 +34,9 @@ public class DtoMapper {
     @Autowired
     StatusTypeService statusTypeService;
 
+    @Autowired
+    BookService bookService;
+
     public Shelf fromShelfDto(ShelfDto shelfDto) {
         Shelf shelf = Shelf.builder()
                 .id(shelfDto.getId())
@@ -61,7 +66,7 @@ public class DtoMapper {
                 .authorLastName(book.getAuthor().getLastName())
                 .idPublisher(book.getPublisher().getId())
                 .publisherName(book.getPublisher().getName())
-                .idStatus(java.util.Optional.ofNullable(book.getStatus().getId()))
+                .idStatus(book.getStatus().getId())
                 .idStatusType(book.getStatus().getStatusType().getId())
                 .statusTypeName(book.getStatus().getStatusType().getName())
                 .comment(book.getStatus().getComment())
@@ -93,11 +98,48 @@ public class DtoMapper {
                                 .build()))
                 .shelf(this.shelfService.getShelfById(bookDto.getIdShelf()))
                 .status(Status.builder()
+                        .id(bookDto.getIdStatus())
                         .dateUp(new Date(System.currentTimeMillis()))
                         .comment(bookDto.getComment())
                         .statusType(this.statusTypeService.getById(bookDto.getIdStatusType()))
                         .build())
                 .build();
         return book;
+    }
+
+    public AuthorDto fromAuthor(Author author) {
+        AuthorDto authorDto = AuthorDto.builder()
+                .id(author.getId())
+                .firstName(author.getFirstName())
+                .lastName(author.getLastName())
+                .nBooks(this.bookService.getBooksByAuthorId(author.getId()).size())
+                .build();
+        return authorDto;
+    }
+
+    public Author fromAuthorDto(AuthorDto authorDto) {
+        Author author = Author.builder()
+                .id(authorDto.getId())
+                .firstName(authorDto.getFirstName())
+                .lastName(authorDto.getLastName())
+                .build();
+        return author;
+    }
+
+    public PublisherDto fromPublisher(Publisher publisher) {
+        PublisherDto publisherDto = PublisherDto.builder()
+                .id(publisher.getId())
+                .name(publisher.getName())
+                .nBooks(this.bookService.getBooksByPublisherId(publisher.getId()).size())
+                .build();
+        return publisherDto;
+    }
+
+    public Publisher fromAuthorDto(PublisherDto publisherDto) {
+        Publisher publisher = Publisher.builder()
+                .id(publisherDto.getId())
+                .name(publisherDto.getName())
+                .build();
+        return publisher;
     }
 }

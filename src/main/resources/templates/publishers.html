@@ -13,12 +13,15 @@
         <thead>
         <tr>
             <td>Name</td>
+            <td>nBooks</td>
         </tr>
         </thead>
         <tbody>
         <tr th:each="publisher : ${publishers}">
             <td th:text="${publisher.name}"/>
+            <td th:text="${publisher.nBooks}"/>
             <td><a th:href="${'/books/publisher/'+publisher.id}">Show Books</a></td>
+            <td><a th:href="${'/publisher/delete/'+publisher.id}">Usun</a></td>
         </tr>
         </tbody>
     </table>

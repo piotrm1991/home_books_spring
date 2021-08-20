@@ -26,7 +26,7 @@ public class BookDto {
 
     private String authorLastName;
 
-    private Optional<Integer> idStatus;
+    private Integer idStatus;
 
     @NotNull
     private Integer idStatusType;
