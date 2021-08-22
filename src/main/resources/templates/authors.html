@@ -22,11 +22,15 @@
             <td th:text="${author.firstName}"/>
             <td th:text="${author.lastName}"/>
             <td th:text="${author.nBooks}"/>
+            <td><a th:href="${'/editAuthor?authorId='+author.id}">Edit Author</a></td>
             <td><a th:href="${'/books/author/'+author.id}">Show Books</a></td>
             <td><a th:href="${'/author/delete/'+author.id}">Delete</a></td>
         </tr>
         </tbody>
     </table>
+    <div class="row">
+        <a href="/createAuthor">Add New Author</a>
+    </div>
 </div>
 </body>
 </html>

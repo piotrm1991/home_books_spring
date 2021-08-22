@@ -20,11 +20,15 @@
         <tr th:each="publisher : ${publishers}">
             <td th:text="${publisher.name}"/>
             <td th:text="${publisher.nBooks}"/>
+            <td><a th:href="${'/editPublisher?publisherId='+publisher.id}">Edit Publisher</a></td>
             <td><a th:href="${'/books/publisher/'+publisher.id}">Show Books</a></td>
-            <td><a th:href="${'/publisher/delete/'+publisher.id}">Usun</a></td>
+            <td><a th:href="${'/publisher/delete/'+publisher.id}">Delete</a></td>
         </tr>
         </tbody>
     </table>
+    <div class="row">
+        <a href="/createPublisher">Add New Publisher</a>
+    </div>
 </div>
 </body>
 </html>

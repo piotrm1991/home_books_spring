@@ -47,4 +47,8 @@ public class BookService {
     public void deleteBook(Integer id) {
         this.bookRepository.deleteById(id);
     }
+
+    public Book getBookById(Integer id) {
+        return this.bookRepository.findById(id).get();
+    }
 }

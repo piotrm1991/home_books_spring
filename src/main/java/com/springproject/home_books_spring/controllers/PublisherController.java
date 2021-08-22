@@ -1,6 +1,7 @@
 package com.springproject.home_books_spring.controllers;
 
 import com.springproject.home_books_spring.domain.dto.PublisherDto;
+import com.springproject.home_books_spring.domain.entites.Author;
 import com.springproject.home_books_spring.domain.entites.Publisher;
 import com.springproject.home_books_spring.services.PublisherService;
 import com.springproject.home_books_spring.util.DtoMapper;
@@ -11,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -49,7 +51,7 @@ public class PublisherController {
         }
     }
 
-    @RequestMapping("/publisher")
+    @RequestMapping("/createPublisher")
     public String createPublisher(Model model) {
         model.addAttribute("publisher", new Publisher());
         return "publisherForm";
@@ -59,5 +61,12 @@ public class PublisherController {
     public String deletePublisher(@PathVariable("id") Integer id) {
         this.publisherService.deletePublisher(id);
         return "redirect:/publishers";
+    }
+
+    @RequestMapping("/editPublisher")
+    public String editPublisher(@RequestParam("publisherId") Integer id, Model model) {
+        Publisher publisher = this.publisherService.findById(id).get();
+        model.addAttribute("publisher", publisher);
+        return "publisherForm";
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ public class AuthorController {
         }
     }
 
-    @RequestMapping("/author")
+    @RequestMapping("/createAuthor")
     public String createAuthor(Model model) {
         model.addAttribute("author", new Author());
         return "authorForm";
@@ -60,5 +61,12 @@ public class AuthorController {
     public String deleteAuthor(@PathVariable("id") Integer id) {
         this.authorService.deleteAuthor(id);
         return "redirect:/authors";
+    }
+
+    @RequestMapping("/editAuthor")
+    public String editAuthor(@RequestParam("authorId") Integer id, Model model) {
+        Author author = this.authorService.findById(id).get();
+        model.addAttribute("author", author);
+        return "authorForm";
     }
 }

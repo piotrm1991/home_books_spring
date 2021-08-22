@@ -85,7 +85,7 @@ public class BookController {
         }
     }
 
-    @RequestMapping("/book")
+    @RequestMapping("/createBook")
     public String createBook(Model model) {
         model.addAttribute("book", new BookDto());
         model.addAttribute("shelves", this.shelfService.getAllShelves());
@@ -99,5 +99,17 @@ public class BookController {
     public String deleteBook(@PathVariable("id") Integer id) {
         this.bookService.deleteBook(id);
         return "redirect:/books";
+    }
+
+    @RequestMapping(value = "/editBook")
+    public String editBook(@RequestParam("bookId") Integer id, Model model) {
+        Book book = this.bookService.getBookById(id);
+        BookDto bookDto = this.dtoMapper.fromBook(book);
+        model.addAttribute("book", bookDto);
+        model.addAttribute("shelves", this.shelfService.getAllShelves());
+        model.addAttribute("authors", this.authorService.getAllAuthors());
+        model.addAttribute("publishers", this.publisherService.getAllPublishers());
+        model.addAttribute("statusTypes", this.statusTypeService.getAllStatusTypes());
+        return "bookForm";
     }
 }

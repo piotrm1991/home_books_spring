@@ -32,10 +32,14 @@
             <td th:text="${book.status.statusType.name}"/>
             <td th:text="${book.status.comment}"/>
             <td th:text="${book.status.dateUp}"/>
-            <td><a th:href="${'/book/delete/'+book.id}">Usun</a></td>
+            <td><a th:href="${'/editBook?bookId='+book.id}">Edit Book</a></td>
+            <td><a th:href="${'/book/delete/'+book.id}">Delete</a></td>
         </tr>
         </tbody>
     </table>
+    <div class="row">
+        <a href="/createBook">Add New Book</a>
+    </div>
 </div>
 </body>
 </html>
